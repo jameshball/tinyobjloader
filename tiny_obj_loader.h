@@ -1000,9 +1000,12 @@ distance(It first, It last) {
 #endif
 
 // Testing for relevant C++20 constexpr library features
+// Exclude MSVC: its constexpr evaluator rejects memcpy inside read8_to_u64
+// even behind an is_constant_evaluated() guard (error C3615).
 #if FASTFLOAT_HAS_IS_CONSTANT_EVALUATED && FASTFLOAT_HAS_BIT_CAST &&           \
     defined(__cpp_lib_constexpr_algorithms) &&                                 \
-    __cpp_lib_constexpr_algorithms >= 201806L /*For std::copy and std::fill*/
+    __cpp_lib_constexpr_algorithms >= 201806L /*For std::copy and std::fill*/  \
+    && !defined(_MSC_VER)
 #define FASTFLOAT_CONSTEXPR20 constexpr
 #define FASTFLOAT_IS_CONSTEXPR 1
 #else
