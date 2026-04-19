@@ -6315,7 +6315,7 @@ static inline texture_type_t parseTextureType(
   return ty;
 }
 
-static tag_sizes parseTagTriple(const char **token) {
+[[maybe_unused]] static tag_sizes parseTagTriple(const char **token) {
   tag_sizes ts;
 
   (*token) += strspn((*token), " \t");
@@ -6341,7 +6341,7 @@ static tag_sizes parseTagTriple(const char **token) {
 }
 
 // Parse triples with index offsets: i, i/j/k, i//k, i/j
-static bool parseTriple(const char **token, int vsize, int vnsize, int vtsize,
+[[maybe_unused]] static bool parseTriple(const char **token, int vsize, int vnsize, int vtsize,
                         vertex_index_t *ret, const warning_context &context) {
   if (!ret) {
     return false;
@@ -6395,7 +6395,7 @@ static bool parseTriple(const char **token, int vsize, int vnsize, int vtsize,
 }
 
 // Parse raw triples: i, i/j/k, i//k, i/j
-static vertex_index_t parseRawTriple(const char **token) {
+[[maybe_unused]] static vertex_index_t parseRawTriple(const char **token) {
   vertex_index_t vi(static_cast<int>(0));  // 0 is an invalid index in OBJ
 
   vi.v_idx = atoi((*token));
